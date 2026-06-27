@@ -14,3 +14,9 @@ Shows CPU model, cores, threads, architecture.
 ```shell
 lscpu
 ```
+
+# Shared Memory
+Show shared memory size.
+```shell
+df -h /dev/shm
+```
