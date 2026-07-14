@@ -20,3 +20,15 @@ Show shared memory size.
 ```shell
 df -h /dev/shm
 ```
+
+# Users and Groups
+Show the user's UID, GID and groups.
+```shell
+id
+```
+
+Show the user's groups.
+```shell
+groups
+```
+
