@@ -3,6 +3,7 @@
 - Executed on device.
 - Called on host.
 - Must return `void`.
+- Can't be a member function of a class.
 
 `__device__`: A device function.
 - Executed on device.
