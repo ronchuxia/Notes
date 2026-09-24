@@ -10,7 +10,7 @@ Add additional layers that have few parameters and tune only these additional la
 
 ![](figures/adapters.png)
 
-![](adapters-for-transformer.png)
+![](figures/adapters-for-transformer.png)
 
 # Prefix Tuning
 Pretend there exist many prefix tokens before the actual sequence and tune only the keys and values of these tokens.
