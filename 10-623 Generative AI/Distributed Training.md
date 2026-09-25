@@ -112,6 +112,7 @@ Many advanced optimizers require storing additional state variables. Optimizer p
 
 # Expert Parallelism
 Expert parallelism splits expert networks across multiple GPUs.
+[MoE](MoE.md)
 
 # Fully Sharded Data Parallel (FSDP)
 Parameters, gradients, and optimizer states are sharded across GPUs. Each GPU owns only 1/N of each tensor. Before a forward or backward pass on a layer, GPUs do an all-gather to temporarily reconstruct the full layer, compute, then discard the gathered parameters.
