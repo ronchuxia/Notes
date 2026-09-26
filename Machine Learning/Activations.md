@@ -9,6 +9,15 @@ $$
 \mathrm{ReLU(x)} = \max(0, x)
 $$
 
+# Leaky ReLU
+$$
+f(x)= \begin{cases} 
+x, & x\geq 0\\
+\alpha x, & x<0
+\end{cases}
+$$
+where $\alpha$ is a small positive constant, such as 0.01.
+ 
 # GeLU
 Gaussian Error Linear Unit.
 $$
