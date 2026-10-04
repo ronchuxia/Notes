@@ -92,3 +92,5 @@ $$
 $$
 
 VAE picks $S = 1$.
+
+Note that VAE models the true posterior $p_\theta(\mathbf z | \mathbf x)$ with a Gaussian $q_\phi(\mathbf z | \mathbf x)$. However, the true posterior is most likely not a Gaussian. This can lead to ELBO being a loose lower bound of the log likelihood.
