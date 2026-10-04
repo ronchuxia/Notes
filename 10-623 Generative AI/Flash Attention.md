@@ -26,3 +26,5 @@ Flash attention combines several ideas:
 $O_i$ stores the running local output that correspond to $Q_i$.
 
 The outer loop updates all of these running local outputs using 1 chunk of $K$ and $V$, while the inner loop updates each one of these running local outputs.
+
+Flash attention discards the intermediate results during the forward pass, it requires **re-computation** of these intermediate results during the backward pass.
