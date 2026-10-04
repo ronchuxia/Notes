@@ -10,3 +10,5 @@ $$
 \text{MSE} = \frac{1}{N} \sum_i (I_i - \hat{I}_i)^2
 $$
 is the mean squared error.
+
+Higher PSNR is equivalent to lower L2 loss.
