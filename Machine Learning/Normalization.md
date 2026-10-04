@@ -22,7 +22,19 @@ Permanently forcing every feature to have zero mean and unit variance could rest
 
 **The result is equivalent to adjusting the center and scale of each feature independently.**
 
-# Layer Normaliztion
+During training, batch normalization normalizes each feature with the **current batch mean and variance**.
+
+It also updates a **running statistics**:
+$$
+\mu_\text{run} = (1 - \alpha) \mu_\text{run} + \alpha \mu_\text{batch}
+$$
+$$
+\sigma^2_\text{run} = (1 - \alpha)\sigma^2_\text{run} + \alpha \sigma^2_\text{batch}
+$$
+
+During inference, it uses the **stored running mean and variance**.
+
+# Layer Normalization
 Layer normalization **normalizes each activation/token independently** across its features.
 
 For all features $x_{ij}$, where i identifies the activation/token, and j identifies the feature:
@@ -47,4 +59,12 @@ Note that in the 2d example, the vector after layer norm is either $[0, 0]$, $[1
 If $d$ is the size of the input vector, $k$ is the dimension of the input set $S$, $k \leq d$:
 $$
 \text{dim} \ {\text{LN}(S)} \leq \min(k, d-2)
+$$
+
+Layer normalization does not have running statistics.
+
+# AdaLN
+AdaLN is a variant of layer normalization whose scale and shift depend on a **conditioning input**.
+$$
+y(\mathbf x, \mathbf c) = \gamma(\mathbf c) \frac{\mathbf x - \mathbf \mu(\mathbf x)}{\sqrt{\sigma^2(\mathbf x) + \mathbf \epsilon}} + \beta(\mathbf c)
 $$
