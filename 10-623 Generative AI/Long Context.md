@@ -1,5 +1,5 @@
 # In Context Learning
-A model can learn to perform a task from examples in its prompt, without updating its parameters.
+A model can learn to perform a task from examples in its prompt at inference time, without updating its parameters.
 
 In context learning benefits from long context.
 
