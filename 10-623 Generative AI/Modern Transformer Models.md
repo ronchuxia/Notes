@@ -65,7 +65,9 @@ where
 - $g = h_q / h_{kv}$ is the number of query heads per group (key and value head).
 
 # Sliding Window Attention
-Sliding window attention reduces the complexity of attention by only looking at a window of w/2+1 tokens.
+Sliding window attention reduces the complexity of attention by allowing each token to only look at w/2 tokens before it.
+
+The receptive field of each token grows as the number of layers grows.
 
 ![](figures/sliding-window-attention.png)
 
