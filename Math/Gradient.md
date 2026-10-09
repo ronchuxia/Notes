@@ -1,3 +1,27 @@
+# Gradient
+For a scalar-valued function $f: \mathbb R^n \rightarrow \mathbb R$, its gradient is the vector of the partial derivatives of $f$ with respect to each input:
+$$
+\nabla f(\mathbf x) = \left[ \frac{\partial f}{\partial x_1}, \dots, \frac{\partial f}{\partial x_n} \right]^T
+$$
+
+For a vector-valued function $f: \mathbb R^n \rightarrow \mathbb R^m$, the equivalence is its Jacobian.
+
+# Subgradient
+For a **convex** scalar-valued function $f: \mathbb R^n \rightarrow \mathbb R$, a vector $\mathbf g \in \mathbb R^n$ is a subgradient of $f$ at $\mathbf x$ if:
+$$
+f(\mathbf y) \geq f( \mathbf x) + \mathbf g^T (\mathbf y - \mathbf x) \quad \forall \mathbf y \in \mathbb R^n
+$$
+
+The subdifferential of $f$ at $\mathbf x$ is the set of all the subgradients:
+$$
+\partial f(\mathbf x) = \{ \mathbf g \in \mathbb R^n : f(\mathbf y) \geq f(\mathbf x) + \mathbf g^T (\mathbf y - \mathbf x)\ \forall y \}
+$$
+
+E.g. For $\mathrm{ReLU}(x) = \max(0, x)$:
+$$
+\partial \mathrm{ReLU}(x) = \begin{cases} \{0\} & x < 0 \\ [0, 1] & x = 0 \\ \{1\} & x > 0 \end{cases}
+$$
+
 # Matrix Multiplication
 Matrix multiplicaiton:
 $$
