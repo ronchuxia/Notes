@@ -22,6 +22,21 @@ $$
 \partial \mathrm{ReLU}(x) = \begin{cases} \{0\} & x < 0 \\ [0, 1] & x = 0 \\ \{1\} & x > 0 \end{cases}
 $$
 
+# Jacobian
+For a vector-valued function $f: \mathbb R^n \rightarrow \mathbb R^m$, its Jacobian is an $m × n$ matrix:
+$$
+J = \begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n}\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n}
+\end{bmatrix}
+$$
+
+The chain rule: For a composition $h = g \circ f$, its Jacobian:
+$$
+J_h(\mathbf x) = J_g(f(\mathbf x)) J_f(\mathbf x)
+$$
+
 # Matrix Multiplication
 Matrix multiplicaiton:
 $$
