@@ -10,7 +10,7 @@ $$
 \mu_j = \frac{1}{m} \sum_{i=1}^m x_{ij}
 $$
 $$
-\sigma_j^2 = \frac{1}{m} \sum_{i=1}^m (x_{ij} - \mu_j)
+\sigma_j^2 = \frac{1}{m} \sum_{i=1}^m (x_{ij} - \mu_j)^2
 $$
 $$
 y_{ij} = \gamma_j \frac{x_{ij} - \mu_j}{\sqrt{\sigma_j^2 + \epsilon}} + \beta_j
@@ -22,14 +22,17 @@ Permanently forcing every feature to have zero mean and unit variance could rest
 
 **The result is equivalent to adjusting the center and scale of each feature independently.**
 
-During training, batch normalization normalizes each feature with the **current batch mean and variance**.
+Note that batch normalization uses the **empirical variance** instead of the sample variance. (It doesn't make much difference.) Meanwhile, it keeps a **running average of the sample variance** as an estimate of the population variance.
+$$
+S_j^2 = \frac{m}{m - 1} \sigma_j^2
+$$
+$$
+{S_\text{run}}_j^2 \leftarrow (1 - \alpha) {S_\text{run}}_j^2 + \alpha S_j^2
+$$
 
-It also updates a **running statistics**:
+It also keeps a running average of the sample mean.
 $$
-\mu_\text{run} = (1 - \alpha) \mu_\text{run} + \alpha \mu_\text{batch}
-$$
-$$
-\sigma^2_\text{run} = (1 - \alpha)\sigma^2_\text{run} + \alpha \sigma^2_\text{batch}
+{\mu_\text{run}}_j \leftarrow (1 - \alpha) {\mu_\text{run}}_j + \alpha \mu_j
 $$
 
 During inference, it uses the **stored running mean and variance**.
