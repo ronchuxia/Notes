@@ -42,6 +42,9 @@ In a deep learning framework, automatic differentiation is often implemented wit
 
 The framework extends the original computational graph to include the operations and values that happened during the back propagation. The result is a larger computational graph that includes the path by which the gradient is computed.
 
+![](figures/automatic-differentiation/reverse-mode-ad-by-extending-computational-graph.png)
+
 This allows the framework to compute the **gradient of gradients** by doing another reverse mode AD on the extended computational graph.
 
-![](figures/automatic-differentiation/reverse-mode-ad-by-extending-computational-graph.png)
+E.g.
+![](figures/automatic-differentiation/gradient-of-gradient.png)

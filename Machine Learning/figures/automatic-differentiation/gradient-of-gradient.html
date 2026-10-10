@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Gradient of Gradient</title>
+<style>body{margin:0;background:#fff;font-family:Helvetica,Arial,sans-serif;padding:16px}
+.k{display:inline-block;width:12px;height:12px;border:1px solid;margin:0 4px 0 16px;vertical-align:middle}</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+</head><body>
+<div>
+<div><span class="k" style="background:#dbe8f7;border-color:#1f5fa8"></span>1. Forward: y = x²</div>
+<div><span class="k" style="background:#fde6cf;border-color:#c0620b"></span>2. Nodes added by backprop of y</div>
+<div><span class="k" style="background:#d5efe0;border-color:#2e8b57"></span>3. Nodes added by backprop of x̄</div>
+</div>
+<pre class="mermaid">
+flowchart LR
+  x((x)) --> sq[square] --> y((y))
+  yb(("ȳ = 1")) --> m1["2 · x · ȳ"] --> xb(("x̄"))
+  x --> m1
+  s(("s = ∂x̄/∂x̄ = 1")) --> m2["2 · ȳ · s"] --> gx(("∂x̄/∂x = 2"))
+  s --> m3["2 · x · s"] --> gyb(("∂x̄/∂ȳ = 2x"))
+  yb --> m2
+  x --> m3
+
+  classDef f fill:#dbe8f7,stroke:#1f5fa8
+  classDef b1 fill:#fde6cf,stroke:#c0620b
+  classDef b2 fill:#d5efe0,stroke:#2e8b57
+  class x,sq,y f
+  class yb,m1,xb b1
+  class s,m2,gx,m3,gyb b2
+</pre>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</body></html>
