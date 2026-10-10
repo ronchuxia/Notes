@@ -28,9 +28,14 @@ $$
 \mathrm{ELBO}(x; \theta, \phi) = \mathbb E_{q_\phi(z|x)} \left[ \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \right]
 $$
 
-Note that:
-$$
-\log p_\theta(x) = \mathrm{ELBO}(x; \theta, \phi) + D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))
+Derivation of ELBO:
+$$\begin{aligned}
+\log p_\theta(x) & = \mathbb E_{q_\phi(z|x)} [\log p_\theta(x)]\\
+& = \mathbb E_{q_\phi(z|x)} \left[ \log \frac{p_\theta(x, z)}{p_\theta(z|x)} \right]\\
+& = \mathbb E_{q_\phi(z|x)} \left[ \log \frac{p_\theta(x, z)}{q_\phi(z|x)} \cdot \frac{q_\phi(z|x)}{p_\theta(z|x)} \right]\\
+& = \mathbb E_{q_\phi(z|x)} \left[ \log \frac{p_\theta(x, z)}{q_\phi(z|x)} \right] + \mathbb E_{q_\phi(z|x)} \left[ \log \frac{q_\phi(z|x)}{p_\theta(z|x)} \right]\\
+& = \mathrm{ELBO}(x; \theta, \phi) + D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))
+\end{aligned}
 $$
 
 Because KL divergence is non-negative,
@@ -42,9 +47,9 @@ $$
 
 By optimizing $\theta$ to increase ELBO, we increase the lower bound of $\log p_\theta (x)$. Therefore, we use ELBO as a **surrogate** for $\log p_\theta(x)$. 
 
-However, this does not guarantee that $\log p_\theta(x)$ also increases. Because $D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))$ may grow.
+However, this does not guarantee that $\log p_\theta(x)$ also increases. Because $D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))$ may increase or decrease.
 
-**For ELBO to be a better surrogate for $\log p_\theta(x)$, we should minimize $D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))$.**
+**For ELBO to be a better surrogate for $\log p_\theta(x)$, we should also minimize $D_\mathrm{KL}(q_\phi(z|x) || p_\theta(z|x))$.**
 
 VAE picks $q_\phi(z|x)$ to be a Gaussian. 
 
@@ -72,7 +77,7 @@ Intuitively, we should alternately:
 1. Maximize $\phi$ to match $q_\phi(z|x)$ to the current $p_\theta$ as close as possible (variational inference).
 2. Then maximize $\theta$ to push up the likelihood $\log p_\theta(x)$ as much as possible (learning).
 
-But this is slow. **VAE instead use SGA and maximize $\theta$ and $\phi$ simultaneously:**
+But this is slow. **VAE instead use SGA and updates $\theta$ and $\phi$ simultaneously:**
 $$
 (\theta, \phi) \leftarrow (\theta, \phi) + \gamma \nabla_{\theta, \phi} \mathrm{ELBO}(x; \theta, \phi)
 $$
@@ -92,5 +97,10 @@ $$
 $$
 
 VAE picks $S = 1$.
+$$
+\mathbb E_{q_\phi(z|x)} [\log p_\theta(x|z)] \approx \log p_\theta(x | z^{(1)})
+$$
 
-Note that VAE models the true posterior $p_\theta(\mathbf z | \mathbf x)$ with a Gaussian $q_\phi(\mathbf z | \mathbf x)$. However, the true posterior is most likely not a Gaussian. This can lead to ELBO being a loose lower bound of the log likelihood.
+VAE maximizes this value by minimizing a **reconstruction loss**.
+
+Note that VAE models the true posterior $p_\theta(\mathbf z | \mathbf x)$ with a Gaussian $q_\phi(\mathbf z | \mathbf x)$. However, the true posterior is most likely not a Gaussian. This can lead to ELBO not being a good enough surrogate for the log likelihood.
