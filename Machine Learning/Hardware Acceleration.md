@@ -37,6 +37,8 @@ A[i, j] = A.data[i * A.stride[0] + j * A.stride[1]]
 - Many linear algebra operations may require compacting the array first.
 
 # Matrix Multiplication
+Note that the following architecture aware analysis does not include hardware cache, it is assumed that each number is loaded directly from dram to register. It also ignores the writeback of C, whose cost is $n^2$.
+
 Vanilla matrix multiplication.
 ```
 dram float A[n][n], B[n][n], C[n][n];
